@@ -1,3 +1,5 @@
-import withBookstoreService from './wiith-bookstore-service'
+import withBookstoreService  from './wiith-bookstore-service'
 
-export default withBookstoreService
+export {
+  withBookstoreService
+} 
