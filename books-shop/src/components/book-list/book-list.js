@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { fetchBooks } from '../../actions';
 import BookListItem from '../book-list-item'
@@ -7,6 +8,7 @@ import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator'
 
 import './book-list.scss'
+import { compose } from '../../utils';
 
 const BookList = ({ books }) => {
   return (
@@ -47,12 +49,13 @@ const mapStateToProps = ({ books, loading, error }) => {
   return { books, loading, error }
 }
 
-const mapDispatchToProps = (dispatch, bookstoreService) => {
+const mapDispatchToProps = (dispatch, { bookstoreService }) => {
   return {
     fetchBooks: fetchBooks(bookstoreService, dispatch)
   }
 }
 
-export default withBookstoreService()(
-  connect(mapStateToProps, mapDispatchToProps)(BookListContainer)
-)
+export default compose(
+  withBookstoreService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(BookListContainer)
