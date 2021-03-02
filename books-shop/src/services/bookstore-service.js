@@ -1,12 +1,11 @@
 import axios from "axios";
 
 export default class BookstoreService {
-  getBooks() {
-    const url = '/search/mongodb';
-    return axios.get(url)
-      .then(res => {
-        const photos = res.data
-        console.log(photos)
-     })
+  async getBooks() {
+    const url = '/search/react';
+    const res = await axios.get(url);
+    const books = res.data.books;
+    console.log(books);
+    return books
   }
 }     
