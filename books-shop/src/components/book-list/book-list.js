@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { booksLoaded, booksRequested, booksError } from '../../actions';
+import { fetchBooks } from '../../actions';
 import BookListItem from '../book-list-item'
 import { withBookstoreService } from '../hoc';
 import Spinner from '../spinner';
@@ -11,12 +11,8 @@ import './book-list.scss'
 class BookList extends Component {
 
   componentDidMount() {
-    const { bookstoreService, booksLoaded, booksRequested, booksError } = this.props;
-    booksRequested()
-
-    bookstoreService.getBooks()
-      .then((data) => booksLoaded(data))
-      .catch((err) => booksError(err))
+    this.props.fetchBooks()
+    
   }
 
   render () {
@@ -47,12 +43,11 @@ const mapStateToProps = ({ books, loading, error }) => {
   return { books, loading, error }
 }
 
-const mapDispatchToProps = {
-  booksLoaded,
-  booksRequested,
-  booksError
+const mapDispatchToProps = (dispatch, bookstoreService) => {
+  return {
+    fetchBooks: fetchBooks(bookstoreService, dispatch)
+  }
 }
-
 
 export default withBookstoreService()(
   connect(mapStateToProps, mapDispatchToProps)(BookList)
