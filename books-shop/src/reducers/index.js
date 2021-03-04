@@ -2,26 +2,13 @@ const initialState = {
   books : [],
   loading: true,
   error: null,
-  cartItems: [
-    {
-      id: 1,
-      name: 'Book 1',
-      count: 3,
-      total: 150
-    },
-
-    {
-      id: 2,
-      name: 'Book 2',
-      count: 7,
-      total: 15
-    }
-  ],
+  cartItems: [],
   orderTotal: 220
 }
 
 const reducer = (state = initialState, action) => {
 
+  console.log(action.type)
   switch (action.type) {
     case 'FETCH_BOOKS_REQUESTED':
       return {
@@ -45,7 +32,57 @@ const reducer = (state = initialState, action) => {
         books: [],
         loading: false,
         error: action.payload
-      }  
+      } 
+      
+    case 'BOOK_ADDED_TO_CART': 
+      const bookId = action.payload
+      const book = state.books.find((book) => book.id === bookId)
+      const itemIndex = state.cartItems.findIndex(({id}) => id === bookId)
+      const item = state.cartItems[itemIndex]
+      
+      let newItem
+      if (item) {
+        console.log(item.total, book.price)
+        newItem = {
+          ...item,
+          count: item.count + 1,
+          total: (Number(item.total)+ Number(book.price)).toFixed(2)
+        }
+      } else {
+        newItem = {
+          id: bookId,
+          title: book.title,
+          count: 1,
+          total: book.price
+        }
+      }
+
+      if (itemIndex < 0) {
+        return {
+          ...state,
+          cartItems: [
+            ...state.cartItems,
+            newItem
+          ]
+        } 
+      } else {
+        return {
+          ...state,
+          cartItems: [
+            ...state.cartItems.slice(0, itemIndex),
+            newItem,
+            ...state.cartItems.slice(itemIndex + 1)
+          ]
+        } 
+      }
+      
+      
+       
+
+      case 'INCREASE':
+        return {
+
+        }
 
       default: 
         return state
