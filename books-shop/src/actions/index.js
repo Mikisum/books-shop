@@ -27,6 +27,13 @@ const bookAddedToCart = (bookId) => {
   }
 }
 
+const bookDeletedFromCart = (bookId) => {
+  return {
+    type: 'BOOK_DELETED_FROM_CART',
+    payload: bookId
+  }
+}
+
 const fetchBooks = (bookstoreService, dispatch) => () => {
   dispatch(booksRequested())
   bookstoreService.getBooks()
@@ -36,5 +43,6 @@ const fetchBooks = (bookstoreService, dispatch) => () => {
 
 export {
   fetchBooks,
-  bookAddedToCart
+  bookAddedToCart,
+  bookDeletedFromCart
 }

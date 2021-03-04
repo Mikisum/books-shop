@@ -14,7 +14,7 @@ export default class BookstoreService {
     return {
       image: book.image,
       id: book.isbn13,
-      price: book.price.replace(/[\s,$]/g, ''),
+      price: +book.price.replace(/[\s,$]/g, ''),
       subtitle: book.subtitle,
       title: book.title,
       url: book.url
