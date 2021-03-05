@@ -17,7 +17,7 @@ const updateShoppingcart = (state, action) => {
       return updateOrder(state, action.payload, -1)
 
     default: 
-      return state.updateShoppingcart  
+      return state.shoppingCart  
 
   }
 }

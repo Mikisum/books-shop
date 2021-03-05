@@ -4,15 +4,15 @@ import { bookAddedToCart, bookDeletedFromCart, allBooksDeletedFromCart } from '.
 
 import './shopping-cart-table.scss'
 
-const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) => {
+const ShoppingCartTable = ({ cartItems, orderTotal, onIncrease, onDecrease, onDelete}) => {
   const renderRow = (item, idx) => {
-    const { id, title, count, total } = item
+    const { id, title, count, orderTotal } = item
     return (
       <tr key={id}>
         <td>{idx + 1}</td>
         <td>{title}</td>
         <td>{count}</td>
-        <td>${total}</td>
+        <td>${orderTotal}</td>
         <td>
           <button
             onClick={() => onDelete(id)}
@@ -49,12 +49,12 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) =>
         </thead>
 
         <tbody>
-          {items.map(renderRow)}
+          {cartItems.map(renderRow)}
         </tbody>
       </table>
 
       <div className="total">
-        Total: ${total}
+        Total: ${orderTotal}
       </div>
     </div>
   )
@@ -62,8 +62,8 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) =>
 
 const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal }}) => {
   return {
-    items: cartItems,
-    total: orderTotal
+    cartItems,
+    orderTotal
   }
 }
 
