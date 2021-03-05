@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bookAddedToCart, bookDeletedFromCart } from '../../actions'
+import { bookAddedToCart, bookDeletedFromCart, allBooksDeletedFromCart } from '../../actions'
 
 import './shopping-cart-table.scss'
 
@@ -71,7 +71,7 @@ const mapDispatchToProps = {
  
     onIncrease: bookAddedToCart,
     onDecrease: bookDeletedFromCart,
-    onDelete: bookDeletedFromCart
+    onDelete: allBooksDeletedFromCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)
