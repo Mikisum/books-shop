@@ -28,6 +28,14 @@ const updateBookList = (state, action) => {
         error: action.payload
       } 
     
+    // case 'CHANGE_SEARCH_WORD': 
+    //   return {
+    //     books: [],
+    //     loading: true,
+    //     error: null,
+    //     searchWord: action.payload
+    //   }  
+    
     default:
       return state.bookList
   }

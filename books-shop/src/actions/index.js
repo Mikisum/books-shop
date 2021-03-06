@@ -41,6 +41,13 @@ const bookDeletedFromCart = (bookId) => {
   }
 }
 
+const changeSearchWord = (searchWord) => {
+  return {
+    type: 'CHANGE_SEARCH_WORD',
+    payload: searchWord
+  }
+}
+
 const fetchBooks = (bookstoreService, dispatch) => () => {
   dispatch(booksRequested())
   bookstoreService.getBooks()
@@ -52,6 +59,7 @@ export {
   fetchBooks,
   bookAddedToCart,
   allBooksDeletedFromCart,
-  bookDeletedFromCart
+  bookDeletedFromCart,
+  changeSearchWord
 
 }
